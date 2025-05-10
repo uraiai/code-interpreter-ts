@@ -1,6 +1,6 @@
 {
   "name": "@uraiai/code-interpreter",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "TypeScript client for interacting with the Thiri API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,6 +9,10 @@
     "prepublishOnly": "npm run build",
     "test": "jest",
     "test:integration": "jest --config jest.config.integration.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uraiai/code-interprer-ts"
   },
   "keywords": [
     "thiri",
