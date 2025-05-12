@@ -6,7 +6,7 @@ export class ThiriClient {
     thiriBaseUrl: string;
     constructor(apiKey: string) {
         this.apiKey = apiKey;
-        this.thiriBaseUrl = process.env.THIRI_API_BASE || 'https://admin.thiri.dev/api';
+        this.thiriBaseUrl = process.env.THIRI_API_BASE || 'https://api.thiri.dev/api';
     }
     urlFor(path: string) {
         return `${this.thiriBaseUrl}${path}`;
@@ -14,7 +14,6 @@ export class ThiriClient {
     // This method is kept for API compatibility but not used internally
     async makeRequest(path: string, options: fetch.RequestInit = {}) {
         const url = this.urlFor(path);
-        console.log(`Making request to ${url} with options: ${JSON.stringify(options)}`);
         
         try {
             const response = await fetch(url, {
@@ -32,12 +31,10 @@ export class ThiriClient {
             
             return await response.json();
         } catch (error) {
-            console.error(`Error making request to ${url}:`, error);
             throw error;
         }
     }
     async createSandbox() {
-        console.log("Creating sandbox");
         const response = await fetch(this.urlFor('/vms'), {
             method: 'POST',
             headers: {
@@ -51,8 +48,6 @@ export class ThiriClient {
         }
         
         const result = await response.json();
-        console.log(`Sandbox creation response: ${JSON.stringify(result)}`);
-        console.log(`Sandbox created with ID: ${result.id}`);
         
         // Wait a moment for the sandbox to initialize
         await new Promise((resolve) => {
@@ -93,7 +88,6 @@ export class Sandbox {
         }
         
         const data = await response.json();
-        console.log(`Execution data: ${JSON.stringify(data)}`);
 
         // Handle SSE for stdout and std err
         const execution = new Execution(data.execution_id, this);

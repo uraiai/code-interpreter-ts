@@ -102,8 +102,3 @@ generateChart().catch(console.error);
 
 - `logs`: Object containing `stdout` and `stderr` arrays with execution output
 - `downloadFile(path: string)`: Download a file from the execution as a base64 string
-
-## Environment Variables
-
-- `THIRI_API_BASE`: Optional. Override the default API base URL (default: https://admin.thiri.dev/api)
-- `THIRI_API_KEY`: Optional. Set your API key instead of passing it to the constructor
