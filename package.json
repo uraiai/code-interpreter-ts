@@ -1,6 +1,6 @@
 {
   "name": "@uraiai/code-interpreter",
-  "version": "0.0.1-alpha.2",
+  "version": "0.0.1-alpha.3",
   "description": "TypeScript client for interacting with the Thiri API",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

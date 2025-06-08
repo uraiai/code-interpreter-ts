@@ -6,7 +6,7 @@ export class ThiriClient {
     thiriBaseUrl: string;
     constructor(apiKey: string) {
         this.apiKey = apiKey;
-        this.thiriBaseUrl = process.env.THIRI_API_BASE || 'https://api.thiri.dev/api';
+        this.thiriBaseUrl = process.env.THIRI_API_BASE || 'https://api.thiri.dev/api/v1';
     }
     urlFor(path: string) {
         return `${this.thiriBaseUrl}${path}`;
@@ -20,7 +20,7 @@ export class ThiriClient {
                 ...options,
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-THIRI-KEY': this.apiKey,
+                    'X-API-KEY': this.apiKey,
                     ...(options.headers as Record<string, string>),
                 }
             });
@@ -39,8 +39,12 @@ export class ThiriClient {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-THIRI-KEY': this.apiKey
-            }
+                'X-API-KEY': this.apiKey
+            },
+            body: JSON.stringify({
+                cpu: 2, // 2 vCPUs
+                mem_mb: 512
+            })
         });
         
         if (!response.ok) {
@@ -76,7 +80,7 @@ export class Sandbox {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-THIRI-KEY': this.client.apiKey
+                'X-API-KEY': this.client.apiKey
             },
             body: JSON.stringify({
                 code: code64
@@ -133,7 +137,7 @@ export class Execution {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'X-THIRI-KEY': this.sandbox.client.apiKey
+                'X-API-KEY': this.sandbox.client.apiKey
             }
         });
         
